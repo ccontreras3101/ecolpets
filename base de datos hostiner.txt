@@ -1,0 +1,2 @@
+Base de Datos MySQL	Usuario MySQL	  Host MySQL	      
+u664353887_ecolp	u664353887_root	  mysql.hostinger.es	
