@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="referidos-form">
-
+<div class= "formulario">
     <?php $form = ActiveForm::begin(); ?>
 
     
@@ -25,5 +25,5 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
 </div>

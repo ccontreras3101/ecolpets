@@ -16,20 +16,21 @@ $headers->add('Content-Type', 'application/pdf');
 ?>
 
 <div class="fondo">
-<div class="subtittle"> Hacemos constar que hemos efectuado el proceso de Hidrolisis Alcalina al animal de compañía:
+<div class="subtittle certificado"> Hacemos constar que hemos efectuado el proceso de Hidrolisis Alcalina al animal de compañía:
 </div>
-	<table>
+	<table class="table_certificado">
 		<tr>
 			<td>
-			 	<h5 class="sub_table">NOMBRE </h5>
+			 	<h5 class="fh5">NOMBRE </h5>
 			</td >
 			<td colspan="2">
 				<?= $model->mascotas->mascotas_nombre; ?>
 			</td>
 		</tr>
+		
 		<tr>
 			<td>
-				<h5 class="sub_table">RAZA</h5>
+				<h5 class="fh5">RAZA</h5>
 			</td>
 			<td colspan="2">
 				<?= $model->mascotas->mascotas_raza; ?>
@@ -37,7 +38,7 @@ $headers->add('Content-Type', 'application/pdf');
 		</tr>
 		<tr>
 			<td>
-				<h5 class="sub_table">PROPIEDAD DE:</h5>
+				<h5 class="fh5">PROPIEDAD DE:</h5>
 			</td>
 			<td colspan="2">
 				<?= $model->propietarios->propietarios_nombre.",".$model->propietarios->propietarios_apellido; ?>
@@ -45,33 +46,33 @@ $headers->add('Content-Type', 'application/pdf');
 		</tr>
 		<tr>
 			<td>
-				<h5 class="sub_table">EN LA FECHA</h5>
+				<h5 class="fh5" >EN LA FECHA</h5>
 			</td>
 			<td colspan="2">
 				<?= $model->fecha_serv; ?>
 			</td>
 			<tr>
 			<td>
-				<h5 class="sub_table">BAJO EL LIBRO N° <?= $model->procesos_libro; ?></h5>
+				<h5 class="fh5">BAJO EL LIBRO N° <?= $model->procesos_libro; ?></h5>
 			</td>
 			<td>
-				<h5 class="sub_table">PÁGINA <?= $model->procesos_pagina; ?></h5>
+				<h5 class="fh5">PÁGINA <?= $model->procesos_pagina; ?></h5>
 			</td>
 			<td>
-				<h5 class="sub_table">LINEA <?= $model->procesos_linea; ?></h5>
+				<h5 class="fh5">LINEA <?= $model->procesos_linea; ?></h5>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<h5 class="sub_table">NOMBRE DE LA EMPRESA:</h5>
+				<h5 class="fh5">CLINICA:</h5>
 			</td>
 			<td colspan="2">
-				<?= $model->planes->planes_nombre; ?>
+				<?= $model->referidos->referidos_nombre; ?>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<h5 class="sub_table">TIPO DE PROCEDIMIENTO:</h5>
+				<h5 class="fh5">TIPO DE PROCEDIMIENTO:</h5>
 			</td>
 			<td colspan="2">
 				Hidrólisis <?= $model->planes->planes_nombre; ?>

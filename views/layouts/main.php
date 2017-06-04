@@ -41,31 +41,35 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            //['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Inicio', 'url' => ['/site/index']],
              //['label' => 'Todo', 'url' => ['/todo/index']],
             //['label' => 'About', 'url' => ['/site/about']],
             //['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Procesos', 'items' => [
-                ['label' => 'Listado', 'url' => ['/procesos/index']],
-                ['label' => 'Registrar', 'url' => ['/procesos/create']]
-            ]],
-           /* ['label' => 'Mascotas', 'items'=> [*/
-                ['label' => 'Mascotas', 'url' => ['/mascotas/index']],
-                /*['label' => 'Registrar', 'url' => ['/mascotas/create']]*/
-            /*]],*/
+            ['label' => 'Registrar Mascota', 'url' => ['/recepcionclinica/create']],
+            ['label' => 'Mascotas Recibidas', 'url' => ['/recepcionclinica/index']],
+            ['label' => 'Procesar Mascotas', 'url' => ['/procesos/index']],
 
-            ['label' => 'Propietarios', 'items' => [
-                ['label' => 'Listado', 'url' => ['/propietarios/index']],
-                ['label' => 'Registrar', 'url' => ['/propietarios/create']]
-            ]],
-            ['label' => 'Planes', 'items' => [
-                ['label' => 'Listado', 'url' => ['/planes/index']],
-                ['label' => 'Registrar', 'url' => ['/planes/create']]
-            ]],
-            ['label' => 'Referidos', 'items'  => [
-                ['label' => 'Listado', 'url' => ['/referidos/index']],
-                ['label' => 'Registrar', 'url' => ['/referidos/create']]
-            ]],
+           //  ['label' => 'Mascotas Procesadas', 'items' => [
+           //      ['label' => 'Listado', 'url' => ['/procesos/index']],
+           //      ['label' => 'Registrar', 'url' => ['/procesos/create']]
+           //  ]],
+           // ['label' => 'Mascotas', 'items'=> [
+           // ['label' => 'Mascotas', 'url' => ['/mascotas/index']],
+           // ['label' => 'Nueva Mascota', 'url' => ['/mascotas/create']]
+           // ]],
+
+           // ['label' => 'Propietarios', 'items' => [
+           // ['label' => 'Listado', 'url' => ['/propietarios/index']],
+           // ['label' => 'Nuevo Propietario', 'url' => ['/propietarios/create']]
+           // ]],
+           // //  ['label' => 'Planes', 'items' => [
+           // //      ['label' => 'Listado', 'url' => ['/planes/index']],
+           // //      ['label' => 'Registrar', 'url' => ['/planes/create']]
+           // //  ]],
+           // ['label' => 'Clinicas', 'items'  => [
+           // ['label' => 'Listado', 'url' => ['/referidos/index']],
+           // ['label' => 'Nueva Clinica', 'url' => ['/referidos/create']]
+           // ]],
             /*
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Referidos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="referidos-view">
-
+<div class= "formulario">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -34,5 +34,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'referidos_email:email',
         ],
     ]) ?>
-
+</div>
 </div>

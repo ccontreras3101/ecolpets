@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Mascotas;
+use app\models\Devolucion;
 
 /**
- * MascotasSearch represents the model behind the search form about `app\models\Mascotas`.
+ * PlanesSearch represents the model behind the search form about `app\models\Planes`.
  */
-class MascotasSearch extends Mascotas
+class DevolucionSearch extends Devolucion
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class MascotasSearch extends Mascotas
     public function rules()
     {
         return [
-            [['mascotas_raza',],'string', 'max' => 55],
-            [['mascotas_id', 'mascotas_peso', 'propietarios_id','id_tipo'], 'integer'],
-            [['mascotas_nombre'], 'safe'],
+            [['devolucion_id'], 'integer'],
+            [['devolucion_nombre'], 'string', 'max' => 55],
         ];
     }
 
@@ -42,7 +41,7 @@ class MascotasSearch extends Mascotas
      */
     public function search($params)
     {
-        $query = Mascotas::find();
+        $query = Devolucion::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +59,10 @@ class MascotasSearch extends Mascotas
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'mascotas_id' => $this->mascotas_id,
-            'mascotas_peso' => $this->mascotas_peso,
-            'id_tipo' => $this->id_tipo,
-            'mascotas_raza' => $this->mascotas_raza,
-            'propietarios_id' => $this->propietarios_id,
+            'devolucion_id' => $this->devolucion_id,
         ]);
 
-        $query->andFilterWhere(['like', 'mascotas_nombre', $this->mascotas_nombre]);
+        $query->andFilterWhere(['like', 'devolucion_nombre', $this->devolucion_nombre]);
 
         return $dataProvider;
     }

@@ -12,14 +12,14 @@ use Yii;
  *
  * @property Procesos[] $procesos
  */
-class Planes extends \yii\db\ActiveRecord
+class Urnas extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'planes';
+        return 'urnas';
     }
 
     /**
@@ -28,27 +28,30 @@ class Planes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['planes_id'], 'integer'],
-            [['planes_nombre'], 'string', 'max' => 50],
+            [['urna_nombre'], 'required'],
+            [['urnas_id'], 'integer'],
+            [['urna_nombre'], 'string', 'max' => 50],
+            [['urnasdescript'], 'string', 'max' => 250],
         ];
     }
 
     /**
-     * @inheritdoc
+     * @inheritdocs
      */
     public function attributeLabels()
     {
         return [
-            'planes_id' => '',
-            'planes_nombre' => 'Hidrodesintegracion',
+            'urna_id' => '',
+            'urna_nombre' => 'Tipo de Urnas',
+            'urna_descript' => 'Descripción de las Urnas',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProcesos()
+    public function getRecepcion()
     {
-        return $this->hasMany(Procesos::className(), ['planes_id' => 'planes_id']);
+        return $this->hasMany(Recepcionclinica::className(), ['urna_id' => 'urna_id']);
     }
 }

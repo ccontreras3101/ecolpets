@@ -42,10 +42,10 @@ class Referidos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'referidos_id' => 'Referidos ID',
-            'referidos_nombre' => 'Referidos Nombre',
-            'referidos_telf' => 'Referidos Telf',
-            'referidos_email' => 'Referidos Email',
+            'referidos_id' => '',
+            'referidos_nombre' => '',
+            'referidos_telf' => '',
+            'referidos_email' => '',
         ];
     }
 
@@ -55,5 +55,12 @@ class Referidos extends \yii\db\ActiveRecord
     public function getProcesos()
     {
         return $this->hasMany(Procesos::className(), ['referidos_id' => 'referidos_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecepcion()
+    {
+        return $this->hasMany(Recepcion::className(), ['id_tipo' => 'id_tipo']);
     }
 }

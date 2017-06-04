@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Mascotas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mascotas-view">
+<div class= "formulario">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,11 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'mascotas_id',
             'mascotas_nombre',
             'mascotas_peso',
-            'mascotas_tipo',
             'mascotas_raza',
+            'mascotas_fdef',
+            'mascotas_edad',
             'propietarios_id',
             
         ],
     ]) ?>
-
+</div>
 </div>

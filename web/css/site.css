@@ -5,6 +5,29 @@ body {
     background-repeat: no-repeat;
 }
 
+/* custom*/
+.formulario{
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px 50px !important;
+    border-radius: 8px !important;
+    margin: 10px !important;
+    color: #101010 !important;
+}
+.formulario_index{
+    padding: 20px 50px !important;
+    margin-top: 50px !important;
+}
+.modal-radio{
+    margin-right: 2% !important;
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+}
+.table-bordered > tbody > tr > td > a {
+    color: #101010 !important;
+}
+
+/* end custom*/
 .wrap {
     min-height: 100%;
     height: auto;
@@ -101,14 +124,7 @@ a.desc:after {
 
 
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
-}
+
 
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
@@ -135,6 +151,7 @@ a.desc:after {
 }
 .navbar-inverse .navbar-nav > li > a {
     color: #fff;
+    font-size: 20px !important;
 }
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     color: #fff;
@@ -189,16 +206,19 @@ a.desc:after {
 }
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
     border: 0px  #ddd;
+    font-size: 16px;
+    border-bottom: 1px solid #c4c4c4;
 }
 .table-bordered > tbody > tr > td {
-    color: #073b5b;
+    color: #101010 !important;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 16px;
     text-transform: uppercase;
 }
 .table > thead:first-child > tr:first-child > th, .table > thead:first-child > tr:first-child > th > a{
-    color: #073b5b;
+    color: #101010;
     font-size: 16px;
+        width: 10%;
 }
 .table-bordered { 
     border: 0px solid #ddd;
@@ -206,4 +226,43 @@ a.desc:after {
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     color: #fff;
     background-color: #073b5b;
+}
+h1{
+    text-transform: capitalize !important;
+}
+.btn-primary, .btn-info{
+    font-size: 16px !important;
+}
+div#w1-collapse, div#w0-collapse, div#w2-collapse {
+    padding-top: 30px;
+}
+span.glyphicon.glyphicon-trash {
+    display: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+    div#w1-collapse, div#w0-collapse, div#w2-collapse {
+    padding-top: 0px;
+    background: #073b5b;
+    }
+    .navbar-brand > img {
+    display: none;
+    }
+    .navbar-inverse {
+    height: 60px;
+    }
+    .btn-info {
+    width: 250px;
+    margin: 5px 0;
+    }
+    html, body {
+    background: #fff;
+    }
+
 }

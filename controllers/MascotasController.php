@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Mascotas;
 use app\models\MascotasSearch;
+use app\models\Tipos;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

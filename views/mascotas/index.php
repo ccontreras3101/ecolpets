@@ -11,11 +11,13 @@ $this->title = 'Mascotas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mascotas-index">
+<div class= "formulario">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
+    <!--
 <?php
 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Privacy Statement', ['/site/mpdf-demo-1'], [
     'class'=>'btn btn-danger', 
@@ -23,7 +25,7 @@ echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Privacy Statement',
     'data-toggle'=>'tooltip', 
     'title'=>'Will open the generated PDF file in a new window'
 ]);
-?> 
+?> -->
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -34,11 +36,14 @@ echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Privacy Statement',
             'mascotas_id',
             'mascotas_nombre',
             'mascotas_peso',
-            'mascotas_tipo',
             'mascotas_raza',
+            'mascotas_fdef',
+            'mascotas_edad',
             'propietarios_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>
+</div>

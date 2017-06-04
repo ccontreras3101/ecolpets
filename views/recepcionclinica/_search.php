@@ -4,30 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\MascotasSearch */
+/* @var $model app\models\ProcesosSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mascotas-search">
+<div class="recepcionclinica-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'mascotas_id') ?>
-
-    <?= $form->field($model, 'mascotas_nombre') ?>
-
-    <?= $form->field($model, 'mascotas_peso') ?>
-
-    <?= $form->field($model, 'mascotas_raza') ?>
-
-    <?= $form->field($model, 'mascotas_fdef') ?>
-
-    <?= $form->field($model, 'mascotas_edad') ?>
-
-
+    <!--mascotas -->
+    
+    <?= $form->field($model, 'mascotas_id') ?>   
+     
+   
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

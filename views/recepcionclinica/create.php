@@ -9,11 +9,11 @@ use yii\jui\AutoComplete;
 /* @var $this yii\web\View */
 /* @var $model app\models\Procesos */
 
-$this->title = 'Procesar';
-$this->params['breadcrumbs'][] = ['label' => 'Procesos', 'url' => ['index']];
+$this->title = 'Ingreso';
+$this->params['breadcrumbs'][] = ['label' => 'Recepcionclinica', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="procesos-create">
+<div class="recepcionclinica-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

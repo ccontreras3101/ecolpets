@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Procesos;
 use app\models\Propietarios;
+use app\models\Recepcionclinica;
 use app\models\Referidos;
 use app\models\Mascotas;
+use app\models\Planes;
 use app\models\ProcesosSearch;
 use app\models\Newsform;
 use yii\web\Controller;
@@ -78,67 +80,16 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
         $model = new Newsform();
 
         if ($model->load(Yii::$app->request->post()) ) {
-            /*propietarios*/
-            // var_dump($model);
-            $cedula=Propietarios::find()->where(['propietarios_doc'=>$model->propietarios_doc])->one();
-
-            if(empty($cedula)){
-
-            $propietarios = new Propietarios();
-            $propietarios->propietarios_doc=$model->propietarios_doc;
-            $propietarios->propietarios_nombre=$model->propietarios_nombre;
-            $propietarios->propietarios_apellido=$model->propietarios_apellido;
-            $propietarios->propietarios_telf=$model->propietarios_telf;
-            $propietarios->propietarios_email=$model->propietarios_email;
-            $propietarios->save(false);
-            /*end propietarios*/
-            }
-            else{
-                $propietarios=$cedula;
-            }
-            /*mascotas*/
-                $mascotas= new Mascotas();
-                $mascotas->mascotas_nombre=$model->mascotas_nombre;
-                $mascotas->mascotas_peso=$model->mascotas_peso;
-                $mascotas->mascotas_tipo=$model->mascotas_tipo;
-                $mascotas->mascotas_raza=$model->mascotas_raza;
-                $mascotas->propietarios_id=$propietarios->propietarios_id;
-                $mascotas->save(false);
-                /* end mascotas*/
-                /*referidos*/
             
-            $email_ref=Referidos::find()->where(['referidos_email'=>$model->referidos_email])->one();
-            if(empty($email_ref)){
-
-                $referidos = new Referidos();
-                $referidos->referidos_nombre=$model->referidos_nombre;
-                $referidos->referidos_telf=$model->referidos_telf;
-                $referidos->referidos_email=$model->referidos_email;
-                $referidos->save(false);
-                /*end referidos*/
-            }
-            else{
-                $referidos=$email_ref;
-            }
                 /*procesos*/
                 $procesos = new Procesos();
-                $procesos->propietarios_id=$propietarios->propietarios_id;
-                $procesos->mascotas_id=$mascotas->mascotas_id;
-                $procesos->referidos_id=$referidos->referidos_id;
-                $procesos->fecha_ing=$model->fecha_ing;
                 $procesos->fecha_serv=$model->fecha_serv;
-                $procesos->obs=$model->obs;
-                $procesos->planes_id=$model->planes_nombre;
                 $procesos->procesos_libro=$model->procesos_libro;
                 $procesos->procesos_pagina=$model->procesos_pagina;
                 $procesos->procesos_linea=$model->procesos_linea;
                 $procesos->save(false);
                
                 return $this->redirect(['index']);
-
-
-            // end procesos
-
             
         } else {
             
@@ -158,81 +109,72 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
      */
     public function actionUpdate($id)
     {
-        $procesos_ = $this->findModel($id);
-        $propietarios_=Propietarios::findBySql('SELECT * FROM propietarios WHERE propietarios_id ='.$procesos_->propietarios_id)->one();
-        $mascotas_=Mascotas::findBySql('SELECT * FROM mascotas WHERE mascotas_id ='.$procesos_->mascotas_id)->one();
-        $referidos_=Referidos::findBySql('SELECT * FROM referidos WHERE referidos_id ='.$procesos_->referidos_id)->one();
-        /*$planes_=Planes::findBySql('SELECT * FROM planes WHERE planes_id ='.$procesos_->planes_nombre);*/
-
+        $procesos_2 = $this->findModel($id);
+        $propietarios_=Propietarios::findBySql('SELECT * FROM propietarios WHERE propietarios_id ='.$procesos_2->propietarios_id)->one();
+        $mascotas_=Mascotas::findBySql('SELECT * FROM mascotas WHERE mascotas_id ='.$procesos_2->mascotas_id)->one();
+        $referidos_=Referidos::findBySql('SELECT * FROM referidos WHERE referidos_id ='.$procesos_2->referidos_id)->one();
+        $recepcion_=Recepcionclinica::findBySql('SELECT * FROM recepcion WHERE mascotas_id ='.$procesos_2->mascotas_id)->one();
+        /*$planes_=Planes::findBySql('SELECT * FROM planes WHERE planes_id ='.$procesos_2->planes_nombre);*/
+        
         $model = new Newsform();
-            
+            /*propietarios*/
             $model->propietarios_doc=$propietarios_->propietarios_doc;
             $model->propietarios_nombre=$propietarios_->propietarios_nombre;
             $model->propietarios_apellido=$propietarios_->propietarios_apellido;
             $model->propietarios_telf=$propietarios_->propietarios_telf;
-            $model->propietarios_email=$propietarios_->propietarios_email;
-  
+            /*end propietarios*/
+            /*mascota*/
             $model->mascotas_nombre=$mascotas_->mascotas_nombre;
             $model->mascotas_peso=$mascotas_->mascotas_peso;
-            $model->mascotas_tipo=$mascotas_->mascotas_tipo;
+            $model->mascotas_edad=$mascotas_->mascotas_edad; 
             $model->mascotas_raza=$mascotas_->mascotas_raza;
-            /*referidos*/
-            
+            $model->mascotas_fdef=$mascotas_->mascotas_fdef;
+            $model->id_tipo=$mascotas_->id_tipo;
+            /*end mascotas*/
+            /*referidos*/   
             $model->referidos_nombre=$referidos_->referidos_nombre;
             $model->referidos_telf=$referidos_->referidos_telf;
-            $model->referidos_email=$referidos_->referidos_email;        
+            $model->referidos_email=$referidos_->referidos_email; 
             /*end referidos*/
             /*procesos*/               
-            $model->fecha_ing=$procesos_->fecha_ing;
-            $model->fecha_serv=$procesos_->fecha_serv;
-            $model->obs=$procesos_->obs;
-            $model->procesos_libro=$procesos_->procesos_libro;
-            $model->procesos_pagina=$procesos_->procesos_pagina;
-            $model->procesos_linea=$procesos_->procesos_linea;
-
-            $model->planes_nombre=$procesos_->planes_id;
+            $model->fecha_serv=$procesos_2->fecha_serv;
+            $model->procesos_libro=$procesos_2->procesos_libro;
+            $model->procesos_pagina=$procesos_2->procesos_pagina;
+            $model->procesos_linea=$procesos_2->procesos_linea;
+            /*end procesos*/
+            $model->propietarios_id=$propietarios_->propietarios_id;
             
         if ($model->load(Yii::$app->request->post())) {
-            /*propietarios*/
             
+            /*propietarios*/
             $propietarios_->propietarios_doc=$model->propietarios_doc;
             $propietarios_->propietarios_nombre=$model->propietarios_nombre;
             $propietarios_->propietarios_apellido=$model->propietarios_apellido;
             $propietarios_->propietarios_telf=$model->propietarios_telf;
-            $propietarios_->propietarios_email=$model->propietarios_email;
             $propietarios_->save(false);
-            /*end propietarios*/
-            /*mascotas*/
-            
+            /*procesos*/
             $mascotas_->mascotas_nombre=$model->mascotas_nombre;
-            $mascotas_->mascotas_peso=$model->mascotas_peso;
-            $mascotas_->mascotas_tipo=$model->mascotas_tipo;
+            $mascotas_->mascotas_peso=$model->mascotas_peso;      
             $mascotas_->mascotas_raza=$model->mascotas_raza;
+            $mascotas_->mascotas_edad=$model->mascotas_edad;
+            $mascotas_->mascotas_fdef=$model->mascotas_fdef;
+            $mascotas_->id_tipo=$model->id_tipo;
             $mascotas_->save(false);
-            /* end mascotas*/
-            /*referidos*/
-            
+            /*referidos*/  
             $referidos_->referidos_nombre=$model->referidos_nombre;
             $referidos_->referidos_telf=$model->referidos_telf;
             $referidos_->referidos_email=$model->referidos_email;
             $referidos_->save(false);
             /*end referidos*/
-            /*procesos*/
-            
-            // $procesos_->propietarios_id=$propietarios->propietarios_id;
-            // $procesos_->mascotas_id=$mascotas->mascotas_id;
-            // $procesos_->referidos_id=$referidos->referidos_id;
-            $procesos_->fecha_ing=$model->fecha_ing;
-            $procesos_->fecha_serv=$model->fecha_serv;
-            $procesos_->obs=$model->obs;
-            $procesos_->planes_id=$model->planes_nombre;
-            $procesos_->procesos_libro=$model->procesos_libro;
-            $procesos_->procesos_pagina=$model->procesos_pagina;
-            $procesos_->procesos_linea=$model->procesos_linea;
+
+            $procesos_2->fecha_serv=$model->fecha_serv;
+            $procesos_2->procesos_libro=$model->procesos_libro;
+            $procesos_2->procesos_pagina=$model->procesos_pagina;
+            $procesos_2->procesos_linea=$model->procesos_linea;
+            $procesos_2->save(false);
+
            
-            $procesos_->save(false);
-           
-            return $this->redirect(['view','id'=>$procesos_->procesos_id]);
+            return $this->redirect(['view','id'=>$procesos_2->procesos_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

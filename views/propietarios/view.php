@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Propietarios', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="propietarios-view">
-
+<div class= "formulario">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -36,5 +36,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'propietarios_email:email',
         ],
     ]) ?>
-
+</div>
 </div>

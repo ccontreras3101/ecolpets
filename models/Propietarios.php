@@ -46,12 +46,12 @@ class Propietarios extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'propietarios_id' => 'Propietarios ID',
-            'propietarios_doc' => 'Propietarios Doc',
-            'propietarios_nombre' => 'Propietarios Nombre',
-            'propietarios_apellido' => 'Propietarios Apellido',
-            'propietarios_telf' => 'Propietarios Telf',
-            'propietarios_email' => 'Propietarios Email',
+            'propietarios_id' => '',
+            'propietarios_doc' => '',
+            'propietarios_nombre' => '',
+            'propietarios_apellido' => '',
+            'propietarios_telf' => '',
+            'propietarios_email' => '',
         ];
     }
 
@@ -70,4 +70,11 @@ class Propietarios extends \yii\db\ActiveRecord
  { 
      return $this->propietarios_id; 
  } 
+ /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecepcion()
+    {
+        return $this->hasMany(Recepcion::className(), ['id_tipo' => 'id_tipo']);
+    }
 }

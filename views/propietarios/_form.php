@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="propietarios-form">
+<div class= "formulario">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -27,5 +28,5 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+</div>
 </div>

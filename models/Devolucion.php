@@ -12,14 +12,14 @@ use Yii;
  *
  * @property Procesos[] $procesos
  */
-class Tipos extends \yii\db\ActiveRecord
+class Devolucion extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'tipos';
+        return 'devolucion';
     }
 
     /**
@@ -28,8 +28,8 @@ class Tipos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_tipo'], 'integer'],
-            [['tipo_mascota'], 'string', 'max' => 2],
+            [['devolucion_id'], 'integer'],
+            [['devolucion_nombre'], 'string', 'max' => 2],
         ];
     }
 
@@ -39,8 +39,8 @@ class Tipos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_tipo' => '',
-            'tipo_mascota' => 'Tipo de Mascota',
+            'devolucion_id' => '',
+            'devolucion_nombre' => 'Devolucion de Restos',
             
         ];
     }
@@ -50,13 +50,13 @@ class Tipos extends \yii\db\ActiveRecord
      */
     public function getRecepcion()
     {
-        return $this->hasMany(Recepcion::className(), ['id_tipo' => 'id_tipo']);
+        return $this->hasMany(Recepcion::className(), ['devolucion_id' => 'devolucion_id']);
     }
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipos()
+    public function getDevolucion()
     {
-        return $this->hasMany(Devolucion::className(), ['id_tipo' => 'id_tipo']);
+        return $this->hasMany(Devolucion::className(), ['devolucion_id' => 'devolucion_id']);
     }
 }

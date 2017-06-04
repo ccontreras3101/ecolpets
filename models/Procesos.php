@@ -16,7 +16,7 @@ use Yii;
  * @property string $fecha_serv
  * @property string $obs
  *
- * @property Propietarios $propietarios
+ * @property  $propietarios
  * @property Mascotas $mascotas
  * @property Referidos $referidos
  * @property Planes $planes
@@ -37,10 +37,11 @@ class Procesos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['planes_id', 'mascotas_id', 'propietarios_id', 'referidos_id', 'fecha_ing', 'fecha_serv', 'obs', 'procesos_libro', 'procesos_pagina', 'procesos_linea', ], 'required'],
+            
             [['planes_id', 'mascotas_id', 'propietarios_id', 'referidos_id'], 'integer'],
             [['fecha_ing', 'fecha_serv'], 'safe'],
             [['obs'], 'string', 'max' => 255],
+            [['procesos_libro', 'procesos_pagina', 'procesos_linea'],'integer'],
             [['propietarios_id'], 'exist', 'skipOnError' => true, 'targetClass' => Propietarios::className(), 'targetAttribute' => ['propietarios_id' => 'propietarios_id']],
             [['mascotas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mascotas::className(), 'targetAttribute' => ['mascotas_id' => 'mascotas_id']],
             [['referidos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Referidos::className(), 'targetAttribute' => ['referidos_id' => 'referidos_id']],
@@ -54,14 +55,14 @@ class Procesos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'procesos_id' => 'Procesos ID',
-            'planes_id' => 'Planes ID',
-            'mascotas_id' => 'Mascotas ID',
-            'propietarios_id' => 'Propietarios ID',
-            'referidos_id' => 'Referidos ID',
-            'fecha_ing' => 'Fecha Ing',
-            'fecha_serv' => 'Fecha Serv',
-            'obs' => 'Obs',
+            'procesos_id' => 'Proceso N°',
+            'planes_id' => 'Hidrodesintegración',
+            'mascotas_id' => '',
+            'propietarios_id' => '',
+            'referidos_id' => '',
+            'fecha_ing' => 'Fecha de Recepción',
+            'fecha_serv' => 'Fecha del Servicio',
+            'obs' => '',
             'procesos_libro'=>'Libro',
             'procesos_pagina'=>'Página',
             'procesos_linea'=>'Linea',
@@ -87,7 +88,6 @@ class Procesos extends \yii\db\ActiveRecord
         return $this->hasOne(Mascotas::className(), ['mascotas_id' => 'mascotas_id']);
     }
 
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -103,8 +103,16 @@ class Procesos extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Planes::className(), ['planes_id' => 'planes_id']);
     }
+
     public function getTipos()
     {
-        return $this->hasOne(Planes::className(), ['id_tipos' => 'id_tipos']);
+        return $this->hasOne(Planes::className(), ['id_tipo' => 'id_tipo']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecepcion()
+    {
+        return $this->hasOne(Recepcionclinica::className(), ['recepcion_id' => 'recepcion_id']);
     }
 }

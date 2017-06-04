@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Tipos;
-use app\models\TiposSearch;
+use app\models\Devolucion;
+use app\models\DevolucionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * PlanesController implements the CRUD actions for Planes model.
  */
-class TiposController extends Controller
+class DevolucionController extends Controller
 {
     /**
      * @inheritdoc
@@ -35,7 +35,7 @@ class TiposController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TiposSearch();
+        $searchModel = new DevolucionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -63,10 +63,10 @@ class TiposController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Tipos();
+        $model = new Devolucion();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tipo]);
+            return $this->redirect(['view', 'id' => $model->devolucion_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +85,7 @@ class TiposController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tipo]);
+            return $this->redirect(['view', 'id' => $model->devolucion_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -115,7 +115,7 @@ class TiposController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Tipos::findOne($id)) !== null) {
+        if (($model = Devolucion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

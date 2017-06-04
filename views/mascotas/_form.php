@@ -11,6 +11,7 @@ use app\models\Propietarios;
 ?>
 
 <div class="mascotas-form">
+<div class= "formulario  col-md-6 col-md-offset-3">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -18,9 +19,20 @@ use app\models\Propietarios;
 
     <?= $form->field($model, 'mascotas_peso')->textInput() ?>
     
-    <?= $form->field($model, 'mascotas_tipo')->textInput() ?>
-    
     <?= $form->field($model, 'mascotas_raza')->textInput() ?>
+
+    <?= $form->field($model, 'mascotas_fdef')->widget(DatePicker::classname(), [
+        'language' => 'es',
+        'pluginOptions' => [
+            'autoclose'=>true,
+            'format' => 'dd/mm/yyyy',
+            'todayHighlight' => true,
+            ], 
+        ])  
+    ?>
+                    
+    <?= $form->field($model, 'mascotas_edad')->textInput() ?>
+
 
     <?= $form->field($model, 'propietarios_id')->dropDownList(ArrayHelper::map(Propietarios::find()->all(),'propietarios_id', 'propietarios'),[
             'prompt'=>'seleccione un propietario']) ?>
@@ -30,5 +42,6 @@ use app\models\Propietarios;
     </div>
 
     <?php ActiveForm::end(); ?>
+</div>
 
 </div>

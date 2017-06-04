@@ -11,7 +11,7 @@ $this->title = 'Referidos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="referidos-index">
-
+<div class= "formulario">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -32,4 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>
+</div>
