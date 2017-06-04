@@ -257,7 +257,7 @@ span.glyphicon.glyphicon-trash {
     .navbar-inverse {
     height: 60px;
     }
-    .btn-info {
+    .btn-info, .btn-primary {
     width: 250px;
     margin: 5px 0;
     }
