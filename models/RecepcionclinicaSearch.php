@@ -20,6 +20,7 @@ class RecepcionclinicaSearch extends Recepcionclinica
         return [
             [['recepcion_id', 'urna_id', 'mascotas_id','propietarios_id',  'referidos_id', 'id_tipo'], 'integer'],
             [['mascotas',  'urnas','referidos','recepcion_fecha', 'tipos','propietarios'], 'safe'],
+            [['cod_registro'],  'string', 'max' => 20],
             
         ];
     }
@@ -70,7 +71,7 @@ class RecepcionclinicaSearch extends Recepcionclinica
             'devolucion_id' => $this->devolucion_id,
             'planes_id' => $this->planes_id,
             'recepcion_fecha' => $this->recepcion_fecha,
-            
+            'cod_registro' => $this->cod_registro,
 
         ]);
         $query->andFilterWhere(['like', 'mascotas.mascotas_nombre', $this->mascotas]);
@@ -78,6 +79,7 @@ class RecepcionclinicaSearch extends Recepcionclinica
         $query->andFilterWhere(['like', 'urnas.urna_nombre', $this->urnas]);
         $query->andFilterWhere(['like', 'referidos.referidos_nombre', $this->referidos]);
         $query->andFilterWhere(['like', 'tipos.tipo_mascota', $this->tipos]);
+        $query->andFilterWhere(['like', 'procesos.mascotas_id', $this->procesos]);
 
         return $dataProvider;
     }

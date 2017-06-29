@@ -38,8 +38,9 @@ class Recepcionclinica extends \yii\db\ActiveRecord
             [['recepcion_fecha'], 'required'],
             [['recepcion_fecha'], 'date','message'=> 'Debe Seleccionar una Fecha'],
             [['mascotas_id',   'recepcion_id'], 'integer'],
-            [['mascotas_fdef','recepcion_fecha','fecha_programada'], 'safe'],
-            [['devolucion_id', 'planes_id' ],  'integer'],
+            [['cod_registro'], 'string', 'max' => 20],
+            [['mascotas_fdef','recepcion_fecha','fecha_programada', 'hora_programada'], 'safe'],
+            [['devolucion_id', 'planes_id' , 'procesos_id'],  'integer'],
             [['mascotas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mascotas::className(), 'targetAttribute' => ['mascotas_id' => 'mascotas_id']],
             [['referidos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Referidos::className(), 'targetAttribute' => ['referidos_id' => 'referidos_id']],
             [['urna_id'], 'exist', 'skipOnError' => true, 'targetClass' => Urnas::className(), 'targetAttribute' => ['urna_id' => 'urna_id']],
@@ -54,13 +55,16 @@ class Recepcionclinica extends \yii\db\ActiveRecord
     {
         return [
             'recepcion_id' => 'N° Recepción',
-            'mascotas_id' => '',
+            'mascotas_id'=>'Codigo de Mascota',
             'referidos_id' => '',
             'mascotas_fdef' => 'Fecha de Defunción',
             'devolucion_id' => 'Devolucion de Restos',
-            'planes_id' => 'Plan de Hidrodesintegracion',
-            'recepcion_fecha' => 'Fecha de Recepcion',
+            'planes_id' => 'Plan de Hidrólisis Alcalina',
+            'recepcion_fecha' => 'Recepcion',
             'fecha_programada' => 'Fecha Programada',
+            'hora_programada' => '',
+            'procesos_id'=>'Proceso N°',
+            'cod_registro'=> 'Cód. de Registro'
         ];
     }
 
@@ -100,7 +104,7 @@ class Recepcionclinica extends \yii\db\ActiveRecord
      */
     public function getProcesos()
     {
-        return $this->hasMany(Procesos::className(), ['propietarios_id' => 'propietarios_id']);
+        return $this->hasMany(Procesos::className(), ['mascotas_id' => 'mascotas_id']);
     }
     /**
      * @return \yii\db\ActiveQuery
@@ -122,5 +126,16 @@ class Recepcionclinica extends \yii\db\ActiveRecord
     public function getDevolucion()
     {
         return $this->hasOne(Devolucion::className(), ['devolucion_id' => 'devolucion_id']);
+    }
+     public function getSelect()
+    {
+        return $this->hasOne(Select::className(), ['select_id' => 'select_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecepcionclinica()
+    {
+        return $this->hasOne(Recepcionclinica::className(), ['propietarios_id' => 'propietarios_id']);
     }
 }

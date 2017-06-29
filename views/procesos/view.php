@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Modificar', ['update', 'id' => $model->procesos_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Modificar Mascota', ['recepcionclinica/index'], ['class' => 'btn btn-primary']) ?>
+        
         <?= Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Imprimir Certificado', ['/procesos/pdf','id' => $model->procesos_id], [
             'class'=>'btn btn-info', 
             'target'=>'_blank', 

@@ -45,18 +45,20 @@ AppAsset::register($this);
              //['label' => 'Todo', 'url' => ['/todo/index']],
             //['label' => 'About', 'url' => ['/site/about']],
             //['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Registrar Mascota', 'url' => ['/recepcionclinica/create']],
-            ['label' => 'Mascotas Recibidas', 'url' => ['/recepcionclinica/index']],
-            ['label' => 'Procesar Mascotas', 'url' => ['/procesos/index']],
+            // ['label' => 'Registrar Mascota', 'url' => ['/recepcionclinica/create']],
+            // ['label' => 'Mascotas Recibidas', 'url' => ['/recepcionclinica/index']],
+            // ['label' => 'Procesar Mascotas', 'url' => ['/procesos/index']],
 
-           //  ['label' => 'Mascotas Procesadas', 'items' => [
-           //      ['label' => 'Listado', 'url' => ['/procesos/index']],
-           //      ['label' => 'Registrar', 'url' => ['/procesos/create']]
-           //  ]],
-           // ['label' => 'Mascotas', 'items'=> [
-           // ['label' => 'Mascotas', 'url' => ['/mascotas/index']],
-           // ['label' => 'Nueva Mascota', 'url' => ['/mascotas/create']]
-           // ]],
+             ['label' => 'Mascotas ', 'items' => [
+                ['label' => 'Nuevo', 'url' => ['/recepcionclinica/create']],
+                ['label' => 'Listado', 'url' => ['/recepcionclinica/index']],
+                ['label' => 'Procesar', 'url' => ['/procesos/index']]
+             ]],
+
+             ['label' => 'Propietarios', 'items'=> [
+             ['label' => 'Nuevo', 'url' => ['/propietarios/create']],
+             ['label' => 'Listado', 'url' => ['/propietarios/index']]
+             ]],
 
            // ['label' => 'Propietarios', 'items' => [
            // ['label' => 'Listado', 'url' => ['/propietarios/index']],
@@ -66,10 +68,10 @@ AppAsset::register($this);
            // //      ['label' => 'Listado', 'url' => ['/planes/index']],
            // //      ['label' => 'Registrar', 'url' => ['/planes/create']]
            // //  ]],
-           // ['label' => 'Clinicas', 'items'  => [
-           // ['label' => 'Listado', 'url' => ['/referidos/index']],
-           // ['label' => 'Nueva Clinica', 'url' => ['/referidos/create']]
-           // ]],
+             ['label' => 'Empresas', 'items'  => [
+             ['label' => 'Nuevo', 'url' => ['/referidos/create']],
+             ['label' => 'Listado', 'url' => ['/referidos/index']]
+             ]],
             /*
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

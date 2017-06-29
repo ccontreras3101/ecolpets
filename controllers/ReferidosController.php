@@ -66,7 +66,7 @@ class ReferidosController extends Controller
         $model = new Referidos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->referidos_id]);
+            return $this->redirect(['index', 'id' => $model->referidos_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

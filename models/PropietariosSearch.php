@@ -63,10 +63,14 @@ class PropietariosSearch extends Propietarios
             'propietarios_doc' => $this->propietarios_doc,
         ]);
 
-        $query->andFilterWhere(['like', 'propietarios_nombre', $this->propietarios_nombre])
-            ->andFilterWhere(['like', 'propietarios_apellido', $this->propietarios_apellido])
-            ->andFilterWhere(['like', 'propietarios_telf', $this->propietarios_telf])
-            ->andFilterWhere(['like', 'propietarios_email', $this->propietarios_email]);
+        $query->andFilterWhere(['like', 'propietarios_nombre', $this->propietarios_nombre]);
+        $query->andFilterWhere(['like', 'propietarios_apellido', $this->propietarios_apellido]);
+        $query->andFilterWhere(['like', 'propietarios_telf', $this->propietarios_telf]);
+        $query->andFilterWhere(['like', 'propietarios_email', $this->propietarios_email]);
+        $query->andFilterWhere(['like', 'recepcionclinica.propietarios_id', $this->recepcionclinica]);
+
+        $query->andWhere('propietarios_nombre != ""');
+        
 
         return $dataProvider;
     }

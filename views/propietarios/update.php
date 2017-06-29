@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Propietarios */
 
-$this->title = 'Update Propietarios: ' . $model->propietarios_id;
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Propietarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->propietarios_id, 'url' => ['view', 'id' => $model->propietarios_id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form2', [
         'model' => $model,
     ]) ?>
 

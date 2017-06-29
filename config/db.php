@@ -7,8 +7,8 @@ return [
     'password' => 'asdf1234',
     'charset' => 'utf8',
 ];
-*/
 
+*/
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=ecolpets',

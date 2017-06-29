@@ -1,0 +1,18 @@
+Formularios
+1. Hidrodesintegracion cambiarlo por hidrolisis alcalina - listo
+2. En en el desplegado individual presencial agregar fecha y hora -listo
+3. Quitar devolver restos y tipo de urna - listo
+
+Nuevos Modulos
+4. Referidos-> Nombre de la empresa, direccion, telefono, nit , representante legal, cedula o nit , tipo de comision - listo
+5. Propietarios -> Nombre del cliente nombres y apellidos direccion, telefono fijo , telefono celular , cedula o nit - listo
+
+Certificado
+6. Mostrar el codigo autoincrementado y debe ser trasladado al certificado, para empresas EM0001 y para mascotas podria ser PET00001
+
+7. Al certificado incluirle Dr Cesar G Valencia gerente general y la pag web como esta en la foto del certificado q te acabe de enviar y quitarle el SAS
+Facturación
+
+8. EN LA FACTURA Codigo nuestro , tipo de hidrolisis colectiva o individual, tipo de animal , peso, nombre animal, nombre del propietario , codigo q asigna la empresa ( en el caso q el cliente sea empresa y no particular)
+
+9. Habilitar Login

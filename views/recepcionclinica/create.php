@@ -6,10 +6,11 @@ use yii\web\JsExpression;
 use yii\jui\AutoComplete;
 
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Procesos */
 
-$this->title = 'Ingreso';
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Recepcionclinica', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

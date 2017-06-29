@@ -9,9 +9,13 @@ use app\models\Propietarios;
 use app\models\Referidos;
 use app\models\Tipos;
 use app\models\Mascotas;
-use kartik\date\DatePicker;
+use app\models\Select;
 use yii\web\JsExpression;
 use yii\jui\AutoComplete;
+/*Date and time*/
+use kartik\date\DatePicker;
+use kartik\time\TimePicker;
+use kartik\checkbox\CheckboxX;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Procesos */
@@ -23,41 +27,121 @@ use yii\jui\AutoComplete;
 
     <?php $form = ActiveForm::begin(); ?>
     <!--mascotas -->
-    
-        
             <div class="row">
+                <h3>Seleccione</h3>
+                <div class="col-lg-3 col-md-3">
+                    <?=
+                    $form->field($model, 'select_id')->dropDownList(ArrayHelper::map(Select::find()->all(),'select_id', 'tipo'),[
+                    'class'=>'form-control select_','prompt'=>'seleccione un tipo']) ?>
+                   <?=
+                    $this->registerJs('
+                        var select_id = "";
+                        $(".empresa").hide();
+                        $(".propietario").hide();
+                        $(".form-control").prop( "disabled", true );
+                        $(".select_").prop("disabled", false);
 
+                        $(".select_").change(function(){
+                            var select_id = document.getElementById("newsform-select_id").options.selectedIndex;
+                            if (select_id == 2) {
+                                $(".form-control").prop("disabled", false);
+                                $(".empresa").hide();
+                                $(".propietario").show();
+                            }else if (select_id == 1){
+                                $(".form-control").prop("disabled", false);
+                                $(".empresa").show();
+                                $(".propietario").show();
+                            }else if (select_id == ""){
+                                $(".form-control").prop("disabled", true);
+                                $(".empresa").hide();
+                                $(".propietario").hide();
+                                $(".select_").prop("disabled", false);
+                            }   
+                        });
+                        ')
+                    ?>
+                </div>
+            </div>
+
+            <div class="row empresa">
                 <!--Nombre de la clinica-->
-                <h3>Clinica</h3>
-                <div class="col-lg-6 col-md-6">
-                    <?php $data_ = Referidos::find()->select(['referidos_nombre as value', 'referidos_nombre as  label','referidos_id as id', 'referidos_telf as ref_telf', 'referidos_email as ref_email'])->asArray()->all(); ?>
-                    <?= $form->field($model, 'referidos_nombre')->widget(\yii\jui\AutoComplete::classname(), [
-                    'name' => 'referidos_nombre',    
-                    'id' => 'referidos_nombre',
-                    'clientOptions' => [
-                    'source' => $data_,
-                    'autoFill'=>true,
-                    'select' => new JsExpression("function( event, ui ) {
-                        $('#newsform-referidos_nombre').val(ui.item.label);
-                        $('#newsform-referidos_telf').val(ui.item.ref_telf);
-                        $('#newsform-referidos_email').val(ui.item.ref_email);
+                <h3>Empresa</h3>
+                <div class="col-lg-3 col-md-3">
+                    <?php $nit = Referidos::find()->select(['referidos_nit as value', 'referidos_nit as label','referidos_nombre as Enombre','referidos_dir as Edir', 'referidos_telf as Etelf', 'referidos_email as Eemail','referidos_rep as Erep', 'referidos_ced as Eced', 'cod_registro as Ecodigo'])->asArray()->all(); ?>
+                    <?= $form->field($model,  'referidos_nit')->widget(\yii\jui\AutoComplete::classname(),[
                         
-                            console.log(ui.item);
-                    }")
-                    ],
-                    ]) ?>   
+                        'name'=>'referidos_nit',
+                        'id'=>'referidos_nit',
+                        'clientOptions'=> [
+                            'source'=>$nit,
+                            'autoFill'=> true,
+                            'select'=> new JsExpression("function( event, ui ){
+                                $('#newsform-referidos_nit').val(ui.item.label);
+                                $('#newsform-referidos_nombre').val(ui.item.Enombre);
+                                $('#newsform-referidos_dir').val(ui.item.Edir);
+                                $('#newsform-referidos_telf').val(ui.item.Etelf);
+                                $('#newsform-referidos_email').val(ui.item.Eemail);
+                                $('#newsform-referidos_rep').val(ui.item.Erep);
+                                $('#newsform-referidos_ced').val(ui.item.Eced);
+                                $('#newsform-cod_registro').val(ui.item.Ecodigo);
+                                }")
+                            ],
+                        ])
+                     ?>
+                </div>
+                
+                <div class="col-lg-3 col-md-3" >
+                    <?php $data_ = Referidos::find()->select(['referidos_nombre as value', 'referidos_nombre as  label','referidos_id as id', 'referidos_telf as ref_telf', 'referidos_email as ref_email'])->asArray()->all(); ?>
+                    <?= $form->field($model, 'referidos_nombre')->textInput() ?>   
                 </div>
                 <div class="col-lg-3 col-md-3">
-                    <?= $form->field($model, 'referidos_telf')->textInput() ?> 
-                </div>   
+                    <?= $form->field($model,  'referidos_dir')->textarea() ?>
+                </div>
+                 
                 <div class="col-lg-3 col-md-3">
-                <?= $form->field($model, 'referidos_email')->textInput() ?> 
+                    <?= $form->field($model, 'referidos_telf')->widget(\yii\widgets\MaskedInput::className(), [
+                            'mask' => '9999-999-99-99',
+                        ]) ?> 
+                </div>   
+            </div>
+            <div class="row empresa">
+                <div class="col-lg-3 col-md-3">
+                    <?= $form->field($model, 'referidos_email')->textInput() ?> 
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <?= $form->field($model, 'referidos_rep')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <?= $form->field($model, 'referidos_ced')->textInput() ?>
+                </div>
+                 <div class="col-lg-3 col-md-3 mascota">
+                    <?= $form->field($model, 'cod_registro')->textInput(['class'=>'form-control mascota_in']) ?>     
                 </div>
             </div>
                 <!-- fin nombre de la clinica -->
+            
                 <!-- Propietarios -->
-            <div class="row">
+            <div class="row propietario" >
                 <h3>Propietario</h3>
+                <div class="col-lg-3 col-md-3">
+                    <?php $data = Propietarios::find()->select(['propietarios_doc as value', 'propietarios_doc as label', 'propietarios_id as Pid', 'propietarios_nombre as nombre', 'propietarios_apellido as apellido', 'propietarios_telf as fijo', 'propietarios_cel as celular','propietarios_dir as direccion'])->asArray()->all(); ?>
+                    <?= $form->field($model, 'propietarios_doc')->widget(\yii\jui\AutoComplete::classname(),[
+                        'name'=>'propietarios_doc',
+                        'id'=> 'propietarios_doc',
+                        'clientOptions'=>[
+                        'source'=>$data,
+                        'autoFill'=>true,
+                        'select'=> new JsExpression("function( event, ui ){
+                            $('#newsform-propietarios_doc').val(ui.item.label);
+                            $('#newsform-propietarios_nombre').val(ui.item.nombre);
+                            $('#newsform-propietarios_apellido').val(ui.item.apellido);
+                            $('#newsform-propietarios_dir').val(ui.item.direccion);
+                            $('#newsform-propietarios_telf').val(ui.item.fijo);
+                            $('#newsform-propietarios_cel').val(ui.item.celular);
+                        }")
+                        ],
+                    ]) ?>   
+                </div>
                 <div class="col-lg-3 col-md-3">
                     <?= $form->field($model, 'propietarios_nombre')->textInput() ?>
                     
@@ -65,33 +149,46 @@ use yii\jui\AutoComplete;
                 <div class="col-lg-3 col-md-3">
                     <?= $form->field($model, 'propietarios_apellido')->textInput() ?>   
                 </div>
+                
                 <div class="col-lg-3 col-md-3">
-                    <?= $form->field($model, 'propietarios_doc')->textInput() ?>   
+                    <?= $form->field($model, 'propietarios_dir')->textarea() ?>   
+                </div>
+            </div>
+            <div class="row propietario" >
+                <div class="col-lg-3 col-md-3">
+                    <?= $form->field($model, 'propietarios_telf')->widget(\yii\widgets\MaskedInput::className(), [
+                            'mask' => '9999-999-99-99',
+                        ]) ?>   
                 </div>
                 <div class="col-lg-3 col-md-3">
-                    <?= $form->field($model, 'propietarios_telf')->textInput() ?>   
+                    <?= $form->field($model, 'propietarios_cel')->widget(\yii\widgets\MaskedInput::className(), [
+                            'mask' => '9999-999-99-99',
+                        ]) ?>   
                 </div>
             </div>
                 <!-- fin propietarios -->
+            
                 <!-- mascotas -->
             <div class="row">
-                <h3>Mascota  </h3>
-                <div class="col-lg-2 col-md-2">
-                    <?= $form->field($model, 'mascotas_nombre')->textInput(['class'=>'form-control mascota_in']) ?> 
-
-                    
+                <h3>Mascota</h3>
+                <div class="col-lg-3 col-md-3 mascota">
+                    <?= $form->field($model, 'mascotas_nombre')->textInput(['class'=>'form-control mascota_in mascota']) ?>     
                 </div>
                 <div class="col-lg-3 col-md-3">
                 <?= $form->field($model, 'id_tipo')->dropDownList(ArrayHelper::map(Tipos::find()->all(),'id_tipo', 'tipo_mascota'),[
                     'prompt'=>'seleccione un tipo']) ?>
                 </div>
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <?= $form->field($model, 'mascotas_raza')->textInput() ?>
                 </div>
-                <div class="col-lg-1 col-md-1">
+                <div class="col-lg-3 col-md-3">
                     <?= $form->field($model, 'mascotas_peso')->textInput() ?>
                 </div>
-                <div class="col-lg-1 col-md-1">
+                
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                
                     <?= $form->field($model, 'mascotas_edad')->textInput() ?>
                 </div>
                 <div class="col-lg-3 col-md-3">
@@ -103,62 +200,33 @@ use yii\jui\AutoComplete;
                            'todayHighlight' => true,
                        ], 
                     ])  ?>
-                    
-                    
+                      
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2 col-md-2">
-                    <h4>Devolver Restos</h4>
-                    <?=
-                    $form->field($model, 'devolucion_id')
-                        ->radioList(
-                            [1 => 'Si', 2 => 'No'],
-                            [
-                                'item' => function($index, $label, $name, $checked, $value) {
-
-                                    $return = '<label class="modal-radio">';
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="3">';
-                                    $return .= '<i></i>';
-                                    $return .= '<span>' . ucwords($label) . '</span>';
-                                    $return .= '</label>';
-
-                                    return $return;
-                                }
-                            ]
-                        )
-                    ->label(false);
-                    ?>
-                </div>
-            
-                <div class="col-lg-2 col-md-2">
-                    <h4>Hidrodesintegración</h4>
+                <div class="col-lg-3 col-md-3">  
                     <?=
                     $form->field($model, 'planes_id')->dropDownList(ArrayHelper::map(Planes::find()->all(),'planes_id', 'planes_nombre'),[
                     'class'=>'form-control planes','prompt'=>'seleccione un tipo']) ?>
                    <?=
                     $this->registerJs('
                         var planes_id = "";
-                        
-
-                          document.getElementById("div_fecha_programada").style.display = "none";
+                        document.getElementById("div_fecha_programada").style.display = "none";
+                        document.getElementById("div_hora_programada").style.display = "none";
                         $(".planes").change(function(){
 
                             var planes_id = document.getElementById("newsform-planes_id").options.selectedIndex;
                             if(planes_id == 2){
                                 console.log(planes_id);
-                                document.getElementById("div_fecha_programada").style.display = "block"; 
+                                document.getElementById("div_fecha_programada").style.display = "block";
+                                document.getElementById("div_hora_programada").style.display = "block";  
                             }else{
                                 document.getElementById("div_fecha_programada").style.display = "none";
-                                
+                                document.getElementById("div_hora_programada").style.display = "none";
                             }
                         });
                         ')
                     ?>
                 </div>
-                <div class="col-lg-3 col-md-3" id="div_fecha_programada">
-                    <h4>Fecha Programada</h4>
-                    
+                <div class="col-lg-3 col-md-3" id="div_fecha_programada"> 
                     <?= $form->field($model, 'fecha_programada')->widget(DatePicker::classname(), [
                     'class'=>'krajee-datepicker form-control fecha_programada',
                     'language' => 'es',
@@ -169,18 +237,11 @@ use yii\jui\AutoComplete;
                        ], 
                     ])  ?>
                     
-
-                    <h6>Cambia solo si es presencial</h6>
                 </div>
-            
-                <div class="col-lg-2 col-md-2">
-                <h4>Tipo de Urna</h4>
-                    <?= $form->field($model, 'urna_id')->dropDownList(ArrayHelper::map(Urnas::find()->all(),'urna_id', 'urna_nombre'),[
-                    'prompt'=>'seleccione un tipo']) ?>
+                <div class="col-lg-3 col-md-3" id="div_hora_programada"> 
+                    <?= $form->field($model, 'hora_programada')->widget(TimePicker::classname(), []) ?>
                 </div>
-            
-                <div class="col-lg-3 col-md-3">
-                    <h4>Fecha de Recepcion</h4>
+                <div class="col-lg-3 col-md-3">  
                     <?= $form->field($model, 'recepcion_fecha')->widget(DatePicker::classname(), [
                     'language' => 'es',
                     'pluginOptions' => [
@@ -189,13 +250,12 @@ use yii\jui\AutoComplete;
                            'todayHighlight' => true,
                        ], 
                     ])  ?>
-                </div>
-                
+                </div>   
             </div>
                 
             <!-- fin mascotas--> 
             <div class="form-group">
-                <?= Html::submitButton( 'Guardar' , ['class' =>  'btn btn-info' ]) ?>
+                <?= Html::submitButton( 'Guardar' , ['class' =>  'btn btn-info', 'id' => 'btn_guardar' ]) ?>
             </div>
             <br>
         </div><!--formulario-->

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Procesos */
 
-$this->title = 'Modificar Datos de Mascota ' . $model->recepcion_id;
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Recepcion', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->recepcion_id, 'url' => ['view', 'id' => $model->recepcion_id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form2', [
         'model' => $model,
     ]) ?>
 

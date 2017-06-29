@@ -78,15 +78,7 @@ $headers->add('Content-Type', 'application/pdf');
 		</tr>
 		<tr>
 			<td>
-				<h5 class="fh5">Devolucion de Restos</h5>
-			</td>
-			<td class="td_recibo">
-				<?= $model->devolucion->devolucion_nombre; ?>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<h5 class="fh5">Plan de Hidrodesintegracion</h5>
+				<h5 class="fh5">Plan de Hidrólisis Alcalina</h5>
 			</td>
 			<td class="td_recibo">
 				<?= $model->planes->planes_nombre; ?>
@@ -102,10 +94,10 @@ $headers->add('Content-Type', 'application/pdf');
 		</tr>
 		<tr>
 			<td>
-				<h5 class="fh5">Tipo de Urna</h5>
+				<h5 class="fh5">Hora Programada</h5>
 			</td>
 			<td class="td_recibo">
-				<?= $model->urnas->urna_nombre; ?>
+				<?= $model->hora_programada; ?>
 			</td>
 		</tr>
 		<tr>

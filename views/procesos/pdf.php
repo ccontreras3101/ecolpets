@@ -16,6 +16,7 @@ $headers->add('Content-Type', 'application/pdf');
 ?>
 
 <div class="fondo">
+<div class="col lg-12 col-md-12 codigo">Código de Empresa EM-00<?= $model->referidos->referidos_id; ?></div>
 <div class="subtittle certificado"> Hacemos constar que hemos efectuado el proceso de Hidrolisis Alcalina al animal de compañía:
 </div>
 	<table class="table_certificado">
@@ -25,7 +26,9 @@ $headers->add('Content-Type', 'application/pdf');
 			</td >
 			<td colspan="2">
 				<?= $model->mascotas->mascotas_nombre; ?>
+				PET-00<?= $model->mascotas->mascotas_id; ?>
 			</td>
+		
 		</tr>
 		
 		<tr>
@@ -69,6 +72,7 @@ $headers->add('Content-Type', 'application/pdf');
 			<td colspan="2">
 				<?= $model->referidos->referidos_nombre; ?>
 			</td>
+		
 		</tr>
 		<tr>
 			<td>

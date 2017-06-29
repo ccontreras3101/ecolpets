@@ -40,7 +40,7 @@ class Planes extends \yii\db\ActiveRecord
     {
         return [
             'planes_id' => '',
-            'planes_nombre' => 'Hidrodesintegracion',
+            'planes_nombre' => 'Hidrólisis Alcalina',
         ];
     }
 

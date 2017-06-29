@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Propietarios */
 
-$this->title = 'Nuevos Propietarios';
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Propietarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

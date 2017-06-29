@@ -12,9 +12,9 @@ $this->title = 'Ecolpets';
         <p class="lead">Sistema de Registro de Procedimientos de Hidrólisis Alcalina.</p>
 
         <p>
-            <a class="btn btn-lg btn-info" href="../recepcionclinica/create">Registrar Mascota</a>
-            <a class="btn btn-lg btn-info" href="../recepcionclinica/index">Mascotas Recibidas</a>
-            <a class="btn btn-lg btn-info" href="../procesos/index">Procesar Mascotas</a>
+            <a class="btn btn-lg btn-info" href="http://kamilox.esy.es/ecolpets/web/index.php/recepcionclinica/create">Registrar Mascota</a>
+            <a class="btn btn-lg btn-info" href="http://kamilox.esy.es/ecolpets/web/index.php/recepcionclinica/index">Mascotas Recibidas</a>
+            <a class="btn btn-lg btn-info" href="http://kamilox.esy.es/ecolpets/web/index.php/procesos/index">Procesar Mascotas</a>
         </p>
     </div>
 

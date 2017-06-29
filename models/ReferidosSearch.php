@@ -19,7 +19,8 @@ class ReferidosSearch extends Referidos
     {
         return [
             [['referidos_id'], 'integer'],
-            [['referidos_nombre', 'referidos_telf', 'referidos_email'], 'safe'],
+            [['referidos_nombre', 'referidos_telf', 'referidos_email','referidos_dir', 'referidos_nit', 'referidos_rep', 'referidos_ced'], 'safe'],
+            [['cod_registro'],  'string', 'max' => 20],
         ];
     }
 
@@ -61,10 +62,19 @@ class ReferidosSearch extends Referidos
         $query->andFilterWhere([
             'referidos_id' => $this->referidos_id,
             'referidos_telf' => $this->referidos_telf,
+            'referidos_nit' => $this->referidos_nit,
+            'referidos_ced' => $this->referidos_ced,
+            'cod_registro'=> $this->cod_registro,
+
         ]);
 
-        $query->andFilterWhere(['like', 'referidos_nombre', $this->referidos_nombre])
-            ->andFilterWhere(['like', 'referidos_email', $this->referidos_email]);
+        $query->andFilterWhere(['like', 'referidos_nombre', $this->referidos_nombre]);
+        $query->andFilterWhere(['like', 'referidos_email', $this->referidos_email]);
+        $query->andFilterWhere(['like', 'referidos_nit', $this->referidos_nit]);
+        $query->andFilterWhere(['like', 'referidos_ced', $this->referidos_ced]);
+        $query->andFilterWhere(['like', 'cod_registro', $this->cod_registro]);
+
+        $query->andWhere('referidos_nombre != ""');
 
         return $dataProvider;
     }

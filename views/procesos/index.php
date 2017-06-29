@@ -42,15 +42,35 @@ $this->params['breadcrumbs'][] = $this->title;
               'value'=>'referidos.referidos_nombre',
               'label'=>'Clinica',  
             ],
+            ['attribute'=>'cod_registro', 
+              'value'=>'referidos.cod_registro',
+              'label'=>'Cod. Registro',  
+            ],
             /*end referidos*/
             'procesos_libro',
             'procesos_pagina',
             'procesos_linea',
             'fecha_ing',
-            'procesos_id',
-            
+             [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view} {update} {link}',
+                'buttons'=>[
+                    'view' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/procesos/view', 'id' => $model->procesos_id], [
+                                'title' => Yii::t('yii', 'Ver'),
+                        ]);  
+                    },'update' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>',['/procesos/update', 'id' => $model->procesos_id], [
+                                'title' => Yii::t('yii', 'Procesar'),
+                        ]);  
+                    },'link' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-print"></span>',['/procesos/pdf', 'id' => $model->procesos_id], [
+                                'title' => Yii::t('yii', 'Imprimir Certificado'),
+                        ]);  
+                    }
 
-            ['class' => 'yii\grid\ActionColumn'],
+                ]     
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?>

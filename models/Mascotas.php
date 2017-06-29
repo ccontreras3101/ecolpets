@@ -30,10 +30,11 @@ class Mascotas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['mascotas_nombre', 'mascotas_peso','id_tipo','mascotas_raza', 'propietarios_id', ], 'required'],
-            [['mascotas_peso', 'propietarios_id', 'mascotas_edad'], 'integer'],
+           
+            [['propietarios_id', 'mascotas_edad'], 'integer'],
             [['mascotas_nombre'], 'string', 'max' => 50],
             [['mascotas_fdef'],'safe'],
+            [['mascotas_peso'],'number', 'numberPattern' => '/^\s*[-+]?[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/'],
         ];
     }
 
@@ -43,7 +44,7 @@ class Mascotas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'mascotas_id' => '',
+            'mascotas_id'=>'Codigo de Mascota',
             'mascotas_nombre' => 'Nombre',
             'mascotas_peso' => 'Peso',
             'id_tipo' => 'Tipo',

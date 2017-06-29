@@ -113,6 +113,6 @@ class Procesos extends \yii\db\ActiveRecord
      */
     public function getRecepcion()
     {
-        return $this->hasOne(Recepcionclinica::className(), ['recepcion_id' => 'recepcion_id']);
+        return $this->hasOne(Recepcionclinica::className(), ['mascotas_id' => 'mascotas_id']);
     }
 }

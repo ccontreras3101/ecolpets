@@ -6,16 +6,16 @@ body {
 }
 
 /* custom*/
+
 .formulario{
     background: rgba(255, 255, 255, 0.7);
     padding: 20px 50px !important;
     border-radius: 8px !important;
-    margin: 10px !important;
+   /*margin: 10px !important;*/
     color: #101010 !important;
 }
 .formulario_index{
     padding: 20px 50px !important;
-    margin-top: 50px !important;
 }
 .modal-radio{
     margin-right: 2% !important;
@@ -156,12 +156,14 @@ a.desc:after {
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     color: #fff;
     background-color: #145784;
+    border-radius: 10px;
+    margin-bottom: 5px;
 }
 .navbar-nav > li > .dropdown-menu {
     margin-top: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 10px;
     background: #006faa;
+    
 }
 .btn-success {
     color: #fff;
@@ -192,6 +194,9 @@ a.desc:after {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     text-transform: uppercase;
 }
+input#newsform-referidos_email {
+    text-transform: lowercase !important;
+}
 .dropdown-menu > li > a {
     display: block;
     padding: 3px 20px;
@@ -200,6 +205,8 @@ a.desc:after {
     line-height: 1.42857143;
     color: #fff;
     white-space: nowrap;
+    font-size: 16px;
+    border-radius: 7px;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: transparent;

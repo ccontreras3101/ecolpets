@@ -5,6 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Propietarios;
 use app\models\PropietariosSearch;
+use app\models\Procesos;
+use app\models\ProcesosSearch;
+use app\models\Mascotas;
+use app\models\MascotasSearch;
+use app\models\Recepcionclinica;
+use app\models\RecepcionclinicaSearch;
+use app\models\Newsform;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,12 +42,14 @@ class PropietariosController extends Controller
      */
     public function actionIndex()
     {
+       
         $searchModel = new PropietariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            
         ]);
     }
 
@@ -66,7 +75,7 @@ class PropietariosController extends Controller
         $model = new Propietarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->propietarios_id]);
+            return $this->redirect(['index', 'id' => $model->propietarios_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

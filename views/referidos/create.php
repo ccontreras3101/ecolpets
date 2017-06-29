@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Referidos */
 
-$this->title = 'Crear Referidos';
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Referidos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

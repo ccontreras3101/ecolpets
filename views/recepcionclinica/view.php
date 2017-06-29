@@ -7,6 +7,8 @@ use app\models\Propietarios;
 use app\models\Referidos;
 use app\models\Urnas;
 use app\models\Tipos;
+use app\models\Procesos;
+use app\models\ProcesosSearch;
 use app\models\TiposSearch;
 use app\models\Devolucion;
 use app\models\DevolucionSearch;
@@ -29,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Modificar', ['update', 'id' => $model->recepcion_id], ['class' => 'btn btn-primary']) ?>
 
-        <?= Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Imprimir Recibo', ['/recepcionclinica/pdf','id' => $model->recepcion_id], [
+        <?= Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> Imprimir Planilla', ['/recepcionclinica/pdf','id' => $model->recepcion_id], [
             'class'=>'btn btn-info', 
             'target'=>'_blank', 
             'data-toggle'=>'tooltip', 
-            'title'=>'Impresión Recibo de Mascota'
+            'title'=>'Impresión Planilla de Recepción de Mascota'
         ]);
         ?>
-        
+        <?= Html::a('Listado', ['index'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -68,13 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
               'value'=>$model->propietarios->propietarios_nombre.",".$model->propietarios->propietarios_apellido,
               'label'=>'Propietario',  
             ],
-            'devolucion_id'=>'devolucion.devolucion_nombre',
+            //'devolucion_id'=>'devolucion.devolucion_nombre',
             'planes_id'=>'planes.planes_nombre',
-            [
-              'value'=>$model->urnas->urna_nombre,
-              'label'=>'Tipo de Urna',  
-            ],
-            'recepcion_fecha',  
+            //[
+              //'value'=>$model->urnas->urna_nombre,
+             // 'label'=>'Tipo de Urna',  
+            //],
+            'procesos_id',
+            'cod_registro',
         ],
     ]) ?>
 

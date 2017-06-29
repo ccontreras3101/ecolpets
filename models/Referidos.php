@@ -30,9 +30,10 @@ class Referidos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['referidos_nombre', 'referidos_telf', 'referidos_email'], 'required'],
-            [['referidos_nombre', 'referidos_email'], 'string', 'max' => 50],
-            [['referidos_telf'], 'string', 'max' => 20],
+           
+            [['referidos_nombre', 'referidos_email','referidos_dir',  'referidos_rep'], 'string', 'max' => 50],
+            [['referidos_nit','referidos_ced'], 'integer'],
+            [['referidos_telf','cod_registro'], 'string', 'max' => 20],
         ];
     }
 
@@ -43,9 +44,14 @@ class Referidos extends \yii\db\ActiveRecord
     {
         return [
             'referidos_id' => '',
-            'referidos_nombre' => '',
-            'referidos_telf' => '',
-            'referidos_email' => '',
+            'referidos_nombre' => 'Nombre',
+            'referidos_telf' => 'Teléfono',
+            'referidos_email' => 'Email',
+            'referidos_dir' => 'Dirección', 
+            'referidos_nit' => 'Nit', 
+            'referidos_rep' => 'Representante Legal', 
+            'referidos_ced' => 'Cedula/Nit Representante',
+            'cod_registro'=>'Código Registro',
         ];
     }
 

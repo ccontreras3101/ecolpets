@@ -2,11 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Procesos;
+use app\models\Mascotas;
+use app\models\Recepcionclinica;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Propietarios */
 
-$this->title = $model->propietarios_id;
+$this->title = $model->propietarios_nombre.",".$model->propietarios_apellido;
 $this->params['breadcrumbs'][] = ['label' => 'Propietarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,24 +19,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Modificar', ['update', 'id' => $model->propietarios_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->propietarios_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Desea ud Eliminar éste propietaros?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Nuevo Propietario', ['create'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'propietarios_id',
+            //'propietarios_id',
             'propietarios_doc',
             'propietarios_nombre',
             'propietarios_apellido',
+            'propietarios_dir',
             'propietarios_telf',
-            'propietarios_email:email',
+            'propietarios_cel',
+            
+            
         ],
     ]) ?>
 </div>

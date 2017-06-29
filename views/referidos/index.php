@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\ReferidosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Referidos';
+$this->title = 'Empresas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="referidos-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nuevo Referido', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nueva Empresa', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,11 +25,51 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
            // 'referidos_id',
+            [
+            'attribute'=>'', 
+            'value'=>function($model){
+                    return 'Em-00'. $model->referidos_id;
+                },
+            'label'=>'Cod. Empresa',
+            ],
             'referidos_nombre',
             'referidos_telf',
-            'referidos_email:email',
+            //'referidos_email:email',
+            
+            [
+            'attribute'=>'', 
+            'value'=> 'referidos_dir', 
+            'label'=>'Dirección',
+            ], 
+            'referidos_nit', 
+            [
+            'attribute'=>'', 
+            'value'=> 'referidos_rep',
+            'label'=>'Representante',
+            ], 
+            [
+            'attribute'=>'referidos_ced', 
+            'value'=> 'referidos_ced',
+            'label'=>'Cédula',
+            ],
+            
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view} {update} {delete}',
+                'buttons'=>[
+                    'view' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/referidos/view', 'id' => $model->referidos_id], [
+                                'title' => Yii::t('yii', 'Ver'),
+                        ]);  
+                    },'update' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>',['/referidos/update', 'id' => $model->referidos_id], [
+                                'title' => Yii::t('yii', 'Editar'),
+                        ]);  
+                    }
+
+                ]     
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?>

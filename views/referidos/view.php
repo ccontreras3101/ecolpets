@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Referidos */
 
-$this->title = $model->referidos_id;
-$this->params['breadcrumbs'][] = ['label' => 'Referidos', 'url' => ['index']];
+$this->title = $model->referidos_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Empresas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="referidos-view">
@@ -16,13 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Modificar', ['update', 'id' => $model->referidos_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->referidos_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Desea ud Eliminar éste item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Nueva Empresa', ['create'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -30,8 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'referidos_id',
             'referidos_nombre',
-            'referidos_telf',
-            'referidos_email:email',
+            'referidos_dir',
+            'referidos_telf', 
+            'referidos_nit',
+            //'referidos_email:email',
+            'referidos_rep', 
+            'referidos_ced',
         ],
     ]) ?>
 </div>

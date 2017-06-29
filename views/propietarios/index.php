@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nuevos Propietarios', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Incluir Propietario', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,14 +24,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+
             'propietarios_id',
             'propietarios_doc',
             'propietarios_nombre',
             'propietarios_apellido',
             'propietarios_telf',
-            'propietarios_email:email',
+            'propietarios_dir',
+            'propietarios_cel',
+            
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view} {update} {delete}',
+                'buttons'=>[
+                    'view' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/propietarios/view', 'id' => $model->propietarios_id], [
+                                'title' => Yii::t('yii', 'Ver'),
+                        ]);  
+                    },'update' => function ($url, $model) {     
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>',['/propietarios/update', 'id' => $model->propietarios_id], [
+                                'title' => Yii::t('yii', 'Editar'),
+                        ]);  
+                    }
+
+                ]     
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?>

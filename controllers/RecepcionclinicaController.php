@@ -15,6 +15,7 @@ use app\models\Planes;
 use app\models\Urnas;
 use app\models\Tipos;
 use app\models\Devolucion;
+use app\models\Select;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,6 +62,7 @@ class RecepcionclinicaController extends Controller
      * @param integer $id
      * @return mixed
      */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -74,12 +76,11 @@ class RecepcionclinicaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-/*
-$mascotas->mascotas_nombre=$model->mascotas_nombre;
-$mascotas->mascotas_peso=$model->mascotas_peso;
-*/
-
-
+    
+    /*
+    $mascotas->mascotas_nombre=$model->mascotas_nombre;
+    $mascotas->mascotas_peso=$model->mascotas_peso;
+    */
 
     public function actionCreate()
     {
@@ -91,13 +92,15 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
 
                 if(empty($cedula)){
 
-                $propietarios = new Propietarios();
-                $propietarios->propietarios_doc=$model->propietarios_doc;
-                $propietarios->propietarios_nombre=$model->propietarios_nombre;
-                $propietarios->propietarios_apellido=$model->propietarios_apellido;
-                $propietarios->propietarios_telf=$model->propietarios_telf;
-                $propietarios->save(false);
-                /*end propietarios*/
+                    $propietarios = new Propietarios();
+                    $propietarios->propietarios_doc=$model->propietarios_doc;
+                    $propietarios->propietarios_nombre=$model->propietarios_nombre;
+                    $propietarios->propietarios_apellido=$model->propietarios_apellido;
+                    $propietarios->propietarios_telf=$model->propietarios_telf;
+                    $propietarios->propietarios_dir=$model->propietarios_dir;
+                    $propietarios->propietarios_cel=$model->propietarios_cel;
+                    $propietarios->save(false);
+                    /*end propietarios*/
                 }
                 else{
                     $propietarios=$cedula;
@@ -106,11 +109,16 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
                     $email_ref=Referidos::find()->where(['referidos_email'=>$model->referidos_email])->one();
                     if(empty($email_ref)){
 
-                $referidos = new Referidos();
-                $referidos->referidos_nombre=$model->referidos_nombre;
-                $referidos->referidos_telf=$model->referidos_telf;
-                $referidos->referidos_email=$model->referidos_email;
-                    $referidos->save(false);
+                    $referidos = new Referidos();
+                    $referidos->referidos_nombre=$model->referidos_nombre;
+                    $referidos->cod_registro=$model->cod_registro;
+                    $referidos->referidos_telf=$model->referidos_telf;
+                    $referidos->referidos_email=$model->referidos_email;
+                    $referidos->referidos_dir=$model->referidos_dir;
+                    $referidos->referidos_nit=$model->referidos_nit;
+                    $referidos->referidos_rep=$model->referidos_rep;
+                    $referidos->referidos_ced=$model->referidos_ced;
+                        $referidos->save(false);
                     }
                     else{
                         $referidos=$email_ref;
@@ -127,19 +135,6 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
                 $mascotas->id_tipo=$model->id_tipo;
                     $mascotas->save(false);
                 /* end mascotas*/
-                /*recepcion*/
-                $recepcion = new Recepcionclinica();
-                $recepcion->propietarios_id=$propietarios->propietarios_id;
-                $recepcion->mascotas_id = $mascotas->mascotas_id;
-                $recepcion->urna_id=$model->urna_id;
-                $recepcion->referidos_id=$referidos->referidos_id;
-                $recepcion->devolucion_id=$model->devolucion_id;
-                $recepcion->planes_id=$model->planes_id;
-                $recepcion->recepcion_fecha=$model->recepcion_fecha;
-                $recepcion->fecha_programada=$model->fecha_programada;
-                $recepcion->id_tipo=$model->id_tipo;
-                    $recepcion->save(false);
-                /*end recepcion*/
                 /* procesos*/
                 $procesos = new Procesos();
                 $procesos->propietarios_id=$propietarios->propietarios_id;
@@ -148,7 +143,23 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
                 $procesos->fecha_ing=$model->recepcion_fecha;
                 $procesos->planes_id=$model->planes_id;
                     $procesos->save(false);
-                /*en procesos*/               
+                /*en procesos*/ 
+                /*recepcion*/
+                $recepcion = new Recepcionclinica();
+                $recepcion->procesos_id=$procesos->procesos_id;
+                $recepcion->cod_registro=$referidos->cod_registro;
+                $recepcion->propietarios_id=$propietarios->propietarios_id;
+                $recepcion->mascotas_id = $mascotas->mascotas_id;
+                $recepcion->urna_id=$model->urna_id;
+                $recepcion->referidos_id=$referidos->referidos_id;
+                $recepcion->devolucion_id=$model->devolucion_id;
+                $recepcion->planes_id=$model->planes_id;
+                $recepcion->recepcion_fecha=$model->recepcion_fecha;
+                $recepcion->fecha_programada=$model->fecha_programada;
+                $recepcion->hora_programada=$model->hora_programada;
+                $recepcion->id_tipo=$model->id_tipo;
+                    $recepcion->save(false);
+                /*end recepcion*/              
                 return $this->redirect(['index']);            
         } else {
                 return $this->render('create', [
@@ -175,12 +186,15 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
         /*$planes_=Planes::findBySql('SELECT * FROM planes WHERE planes_id ='.$procesos_->planes_nombre);*/
 
         $model = new Newsform();
-            
+            /*propietarios*/
             $model->propietarios_doc=$propietarios_->propietarios_doc;
             $model->propietarios_nombre=$propietarios_->propietarios_nombre;
             $model->propietarios_apellido=$propietarios_->propietarios_apellido;
             $model->propietarios_telf=$propietarios_->propietarios_telf;
-
+            $model->propietarios_dir=$propietarios_->propietarios_dir;
+            $model->propietarios_cel=$propietarios_->propietarios_cel;
+            /* end propietarios*/
+            /*mascotas*/
             $model->mascotas_nombre=$mascotas_->mascotas_nombre;
             $model->mascotas_peso=$mascotas_->mascotas_peso;
             $model->mascotas_edad=$mascotas_->mascotas_edad; 
@@ -190,19 +204,27 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
             /*end mascotas*/
             /*referidos*/   
             $model->referidos_nombre=$referidos_->referidos_nombre;
+            $model->cod_registro=$referidos_->cod_registro;
             $model->referidos_telf=$referidos_->referidos_telf;
-            $model->referidos_email=$referidos_->referidos_email;        
+            $model->referidos_email=$referidos_->referidos_email;
+            $model->referidos_dir=$referidos_->referidos_dir;
+            $model->referidos_nit=$referidos_->referidos_nit;
+            $model->referidos_rep=$referidos_->referidos_rep;
+            $model->referidos_ced=$referidos_->referidos_ced;
             /*end referidos*/
             /*recepcion*/
-            $model->urna_id=$recepcion_->urna_id;               
+            $model->urna_id=$recepcion_->urna_id;
+            $model->cod_registro=$recepcion_->cod_registro;
             $model->devolucion_id=$recepcion_->devolucion_id;
             $model->planes_id=$recepcion_->planes_id;
             $model->urna_id=$recepcion_->urna_id;
             $model->referidos_id=$recepcion_->referidos_id;
             $model->fecha_programada=$recepcion_->fecha_programada;
+            $model->hora_programada=$recepcion_->hora_programada;
             $model->id_tipo=$recepcion_->id_tipo;
             /*en recepcion*/
             /*procesos*/
+            $model->propietarios_id=$procesos_->propietarios_id;
             $model->mascotas_id=$procesos_->mascotas_id;
             $model->referidos_id=$procesos_->referidos_id;
             $model->recepcion_fecha=$procesos_->fecha_ing;
@@ -215,12 +237,19 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
             $propietarios_->propietarios_nombre=$model->propietarios_nombre;
             $propietarios_->propietarios_apellido=$model->propietarios_apellido;
             $propietarios_->propietarios_telf=$model->propietarios_telf;
+            $propietarios_->propietarios_cel=$model->propietarios_cel;
+            $propietarios_->propietarios_dir=$model->propietarios_dir;
             $propietarios_->save(false);
             /*end propietarios*/
             /*referidos*/  
             $referidos_->referidos_nombre=$model->referidos_nombre;
+            $referidos_->cod_registro=$model->referidos_nombre;
             $referidos_->referidos_telf=$model->referidos_telf;
             $referidos_->referidos_email=$model->referidos_email;
+            $referidos_->referidos_dir=$model->referidos_dir;
+            $referidos_->referidos_nit=$model->referidos_nit;
+            $referidos_->referidos_rep=$model->referidos_rep;
+            $referidos_->referidos_ced=$model->referidos_ced;
             $referidos_->save(false);
             /*end referidos*/
             /*mascotas*/
@@ -234,12 +263,15 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
             $mascotas_->save(false);
             /* end mascotas*/
             /*recepcion*/
+
             $recepcion_->urna_id=$model->urna_id;
+            $recepcion_->cod_registro=$model->cod_registro;
             $recepcion_->referidos_id=$model->referidos_id; 
             $recepcion_->devolucion_id=$model->devolucion_id;
             $recepcion_->planes_id=$model->planes_id;
             $recepcion_->recepcion_fecha=$model->recepcion_fecha;
             $recepcion_->fecha_programada=$model->fecha_programada;
+            $recepcion_->hora_programada=$model->hora_programada;
             $recepcion_->id_tipo=$model->id_tipo;
             $recepcion_->save(false);
             /*end recepcion*/

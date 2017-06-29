@@ -70,10 +70,11 @@ class ProcesosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-/*
-$mascotas->mascotas_nombre=$model->mascotas_nombre;
-$mascotas->mascotas_peso=$model->mascotas_peso;
-*/
+    
+    /*
+    $mascotas->mascotas_nombre=$model->mascotas_nombre;
+    $mascotas->mascotas_peso=$model->mascotas_peso;
+    */
 
     public function actionCreate()
     {
@@ -224,7 +225,7 @@ $mascotas->mascotas_peso=$model->mascotas_peso;
             // set to use core fonts only
             'mode' => Pdf::MODE_CORE, 
             // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
+            'format' => Pdf::FORMAT_LETTER, 
             // portrait orientation
             'orientation' => Pdf::ORIENT_LANDSCAPE, 
             // stream to browser inline

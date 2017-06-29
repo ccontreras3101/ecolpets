@@ -18,6 +18,7 @@ use Yii;
  */
 class Propietarios extends \yii\db\ActiveRecord
 {
+   
     /**
      * @inheritdoc
      */
@@ -32,11 +33,12 @@ class Propietarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['propietarios_doc', 'propietarios_nombre', 'propietarios_apellido', 'propietarios_telf', 'propietarios_email'], 'required'],
+            [['propietarios_doc', 'propietarios_nombre', 'propietarios_apellido', ], 'required'],
             [['propietarios_nombre', 'propietarios_apellido'], 'string', 'max' => 50],
+            [['propietarios_dir'], 'string', 'max' => 250],
             [['propietarios_telf'], 'string', 'max' => 20],
             [['propietarios_email'], 'string', 'max' => 55],
-            [['propietarios_doc', 'propietarios_id'],'integer'],
+            [['propietarios_doc', 'propietarios_id', 'propietarios_telf', 'propietarios_cel'],'integer'],
         ];
     }
 
@@ -46,12 +48,14 @@ class Propietarios extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'propietarios_id' => '',
-            'propietarios_doc' => '',
-            'propietarios_nombre' => '',
-            'propietarios_apellido' => '',
-            'propietarios_telf' => '',
-            'propietarios_email' => '',
+            'propietarios_id' => 'N° de Propietario',
+            'propietarios_doc' => 'Cédula/Nit',
+            'propietarios_nombre' => 'Nombres',
+            'propietarios_apellido' => 'Apellidos',
+            'propietarios_telf' => 'Teléfono',
+            'propietarios_email' => 'Email',
+            'propietarios_dir' => 'Dirección',
+            'propietarios_cel' => 'Celular',
         ];
     }
 
@@ -70,11 +74,24 @@ class Propietarios extends \yii\db\ActiveRecord
  { 
      return $this->propietarios_id; 
  } 
- /**
+  public function getPropietarios_doc() 
+ { 
+     return $this->propietarios_doc; 
+ } 
+ 
+    /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRecepcion()
+    public function getMascotas()
     {
-        return $this->hasMany(Recepcion::className(), ['id_tipo' => 'id_tipo']);
+        return $this->hasOne(Mascotas::className(), ['mascotas_id' => 'mascotas_id']);
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecepcionclinica()
+    {
+        return $this->hasOne(Recepcionclinica::className(), ['propietarios_id' => 'propietarios_id']);
+    }
+    
 }
